@@ -1,17 +1,15 @@
 import React from "react";
 import { gsap } from "gsap";
-
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import { ScrollToPlugin } from "gsap/dist/ScrollToPlugin";
-
 import { useEffect, useRef } from "react";
+import useLocoScroll from "../hooks/useLocoScroll";
 
 type Props = {};
 
 const scroll = (props: Props) => {
   let scrollerSection = useRef<HTMLDivElement>(null);
   let nav = useRef<HTMLDivElement>(null);
-
+  useLocoScroll();
   useEffect(() => {
     // INIT ANIMATION
     let baseComponent = gsap.utils.selector("#baseComponent");
@@ -37,6 +35,7 @@ const scroll = (props: Props) => {
       ease: "none",
       scrollTrigger: {
         trigger: "#wrapper",
+        scroller: "#main-container",
         start: "top top",
         end: () => {
           let endValue = innerWidth * 6;
@@ -54,6 +53,7 @@ const scroll = (props: Props) => {
       rotate: 360,
       ease: "none",
       scrollTrigger: {
+        scroller: "#main-container",
         trigger: "#wrapper",
         start: "top top",
         end: () => {
@@ -70,7 +70,12 @@ const scroll = (props: Props) => {
   return (
     <main className="font-manrope relative bg-white">
       {/* <div className="flex justify-center items-center fixed h-screen w-full invert  z-50"></div> */}
-      <div className="font-semibold max-w-7xl mx-auto sticky top-10 left-0 z-50 !mix-blend-difference">
+      <div
+        data-scroll
+        data-scroll-sticky
+        data-scroll-target="#main-container"
+        className="font-semibold max-w-7xl mx-auto sticky top-10 left-0 z-50 !mix-blend-difference"
+      >
         <div
           ref={nav}
           id="nav"
@@ -81,7 +86,12 @@ const scroll = (props: Props) => {
       </div>
 
       <div className="bg-white w-full h-[100vh] flex justify-center items-center">
-        <h1 className="text-4xl text-center font-semibold">
+        <h1
+          data-scroll
+          data-scroll-speed="2"
+          data-scroll-delay="0.2"
+          className="text-4xl text-center font-semibold"
+        >
           Just try scrolling on this page!
         </h1>
       </div>
@@ -102,7 +112,12 @@ const scroll = (props: Props) => {
       </div>
 
       <div className="bg-white w-full h-[100vh] flex justify-center items-center">
-        <h2 className="text-4xl text-center font-semibold">
+        <h2
+          data-scroll
+          data-scroll-speed="2"
+          data-scroll-delay="0.2"
+          className="text-4xl text-center font-semibold"
+        >
           And now it scrolls as usual!
         </h2>
       </div>
