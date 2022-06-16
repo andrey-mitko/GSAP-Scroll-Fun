@@ -1,12 +1,8 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
 import { gsap } from "gsap";
-
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-
 import { useEffect, useRef } from "react";
-import { Event } from "firebase-functions";
 
 const GreenBox: NextPage = () => {
   let box = useRef<HTMLDivElement>(null);
