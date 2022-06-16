@@ -53,9 +53,10 @@ export default function useLocoScroll(){
             locoScroll.update();
         }
     }
-    window.addEventListener("resize", function(){ locoScroll.update(); });
-
+    window.addEventListener("resize", function(){ lsUpdate; });
+    window.addEventListener("load", function(){ lsUpdate; });
     ScrollTrigger.addEventListener('refresh', lsUpdate)
+    
     ScrollTrigger.refresh();
 
     // return () => {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import type { NextPage } from "next";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
@@ -9,8 +9,10 @@ type Props = {};
 
 const Home: NextPage = (props: Props) => {
   let scrollerSection = useRef<HTMLDivElement>(null);
+
   let nav = useRef<HTMLDivElement>(null);
   useLocoScroll();
+
   useEffect(() => {
     // INIT ANIMATION
     let baseComponent = gsap.utils.selector("#baseComponent");
@@ -64,6 +66,8 @@ const Home: NextPage = (props: Props) => {
         anticipatePin: 1,
       },
     });
+
+    ScrollTrigger.refresh();
   }, []);
 
   return (
