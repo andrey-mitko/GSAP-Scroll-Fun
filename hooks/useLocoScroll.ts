@@ -53,6 +53,7 @@ export default function useLocoScroll(){
             locoScroll.update();
         }
     }
+    window.addEventListener("resize", function(){ locoScroll.update(); });
 
     ScrollTrigger.addEventListener('refresh', lsUpdate)
     ScrollTrigger.refresh();
