@@ -1,16 +1,16 @@
+import React from "react";
 import type { NextPage } from "next";
-import Head from "next/head";
-import Image from "next/image";
 import { gsap } from "gsap";
-
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-
 import { useEffect, useRef } from "react";
-import { Event } from "firebase-functions";
+import useLocoScroll from "../hooks/useLocoScroll";
 
-const Home: NextPage = () => {
-  let box = useRef<HTMLDivElement>(null);
+type Props = {};
 
+const Home: NextPage = (props: Props) => {
+  let scrollerSection = useRef<HTMLDivElement>(null);
+  let nav = useRef<HTMLDivElement>(null);
+  useLocoScroll();
   useEffect(() => {
     // INIT ANIMATION
     let baseComponent = gsap.utils.selector("#baseComponent");
@@ -20,43 +20,137 @@ const Home: NextPage = () => {
       css: { visibility: "visible" },
     });
 
-    // GREEN BOX ANIMATIONS
-    gsap.to(box.current, {
-      rotate: () => 360,
-      repeat: 0,
-      duration: 1,
-    });
-
     // SECTION SCROLL ANIMATION
+
     gsap.registerPlugin(ScrollTrigger);
 
-    ScrollTrigger.defaults({
-      toggleActions: "restart pause resume pause",
-      scroller: ".container",
+    // gsap.set(".massiveImage", {
+    //   backgroundImage: `url(https://source.unsplash.com/random/${
+    //     innerWidth * 3
+    //   }x${innerHeight})`,
+    // });
+
+    gsap.to("#scrollerSection", {
+      xPercent: -100,
+      x: () => innerWidth,
+      ease: "none",
+      scrollTrigger: {
+        trigger: "#wrapper",
+        scroller: "#main-container",
+        start: "top top",
+        end: () => {
+          let endValue = innerWidth * 6;
+          return endValue;
+        },
+        scrub: 1,
+        pin: true,
+        anticipatePin: 1,
+      },
+    });
+    console.log(window.innerWidth - (window.innerWidth - 1280) / 2);
+
+    const xTranslate =
+      window.innerWidth > 1280
+        ? window.innerWidth - (window.innerWidth - 1280)
+        : window.innerWidth - 28 * 2;
+    gsap.to("#nav", {
+      x: xTranslate - nav.current!.offsetWidth,
+      y: window.innerHeight - 120,
+      rotate: 360,
+      ease: "none",
+      scrollTrigger: {
+        scroller: "#main-container",
+        trigger: "#wrapper",
+        start: "top top",
+        end: () => {
+          let endValue = innerWidth * 6;
+          return endValue;
+        },
+        scrub: 1,
+        pin: true,
+        anticipatePin: 1,
+      },
     });
   }, []);
 
-  const onEnter = (e: React.MouseEvent<HTMLDivElement>) => {
-    gsap.to(e.currentTarget, { backgroundColor: "#e77614" });
-  };
-
-  const onLeave = (e: React.MouseEvent<HTMLDivElement>) => {
-    gsap.to(e.currentTarget, { backgroundColor: "#28a92b" });
-  };
-
   return (
-    <main className="">
-      <Head>
-        <title>Experimenting</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
+    <main className="font-manrope relative bg-white overflow-x-hidden">
+      {/* <div className="flex justify-center items-center fixed h-screen w-full invert  z-50"></div> */}
       <div
-        className="w-52 h-52 bg-[#28a92b]"
-        ref={box}
-        onMouseEnter={onEnter}
-        onMouseLeave={onLeave}
-      ></div>
+        data-scroll
+        data-scroll-sticky
+        data-scroll-target="#main-container"
+        className="font-semibold px-7 xl:px-0 max-w-7xl mx-auto sticky top-10 left-0 z-50 !mix-blend-difference"
+      >
+        <div
+          ref={nav}
+          id="nav"
+          className="font-semibold w-fit text-xl lg:text-2xl fixed select-none text-white !mix-blend-difference"
+        >
+          Привет!
+        </div>
+      </div>
+
+      <div className="bg-white w-full h-[100vh] flex justify-center items-center">
+        <h1
+          data-scroll
+          data-scroll-speed="2"
+          data-scroll-delay="0.2"
+          className="text-2xl lg:text-4xl text-center font-semibold"
+        >
+          Just try scrolling on this page!
+        </h1>
+      </div>
+
+      <div className="" id="wrapper">
+        <div
+          className="flex min-w-min font-manrope"
+          id="scrollerSection"
+          ref={scrollerSection}
+        >
+          <div className="bg-red-400 w-[100vw] h-[100vh] flex justify-center items-center">
+            <span className="uppercase text-5xl lg:text-9xl font-black text-red-900 ">
+              Red
+            </span>
+          </div>
+          <div className="bg-orange-400 w-[100vw] h-[100vh]  flex justify-center items-center">
+            <span className="uppercase text-5xl lg:text-9xl font-black text-orange-900 ">
+              Orange
+            </span>
+          </div>
+          <div className="bg-yellow-400 w-[100vw] h-[100vh]  flex justify-center items-center">
+            <span className="uppercase text-5xl lg:text-9xl font-black text-yellow-900 ">
+              Yellow
+            </span>
+          </div>
+          <div className="bg-green-400 w-[100vw] h-[100vh]  flex justify-center items-center">
+            <span className="uppercase text-5xl lg:text-9xl font-black text-green-900 ">
+              Green
+            </span>
+          </div>
+          <div className="bg-blue-400 w-[100vw] h-[100vh]  flex justify-center items-center">
+            <span className="uppercase text-5xl lg:text-9xl font-black text-blue-900 ">
+              Blue
+            </span>
+          </div>
+          <div className="bg-purple-400 w-[100vw] h-[100vh]  flex justify-center items-center">
+            <span className="uppercase text-5xl lg:text-9xl font-black text-purple-900 ">
+              Purple
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-white w-full h-[100vh] flex justify-center items-center">
+        <h2
+          data-scroll
+          data-scroll-speed="2"
+          data-scroll-delay="0.2"
+          className="text-2xl lg:text-4xl text-center font-semibold"
+        >
+          And now it scrolls as usual!
+        </h2>
+      </div>
     </main>
   );
 };

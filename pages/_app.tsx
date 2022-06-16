@@ -8,8 +8,8 @@ import useLocoScroll from "../hooks/useLocoScroll";
 function MyApp({ Component, pageProps }: AppProps) {
   // useLocoScroll();
   return (
-    <div id="main-container">
-      <Component {...pageProps} />;
+    <div id="main-container" data-scroll-section>
+      <Component {...pageProps} />
     </div>
   );
 }
