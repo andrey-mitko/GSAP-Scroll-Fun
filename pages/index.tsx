@@ -21,14 +21,7 @@ const Home: NextPage = (props: Props) => {
     });
 
     // SECTION SCROLL ANIMATION
-
     gsap.registerPlugin(ScrollTrigger);
-
-    // gsap.set(".massiveImage", {
-    //   backgroundImage: `url(https://source.unsplash.com/random/${
-    //     innerWidth * 3
-    //   }x${innerHeight})`,
-    // });
 
     gsap.to("#scrollerSection", {
       xPercent: -100,
@@ -75,7 +68,6 @@ const Home: NextPage = (props: Props) => {
 
   return (
     <main className="font-manrope relative bg-white overflow-x-hidden">
-      {/* <div className="flex justify-center items-center fixed h-screen w-full invert  z-50"></div> */}
       <div
         data-scroll
         data-scroll-sticky
