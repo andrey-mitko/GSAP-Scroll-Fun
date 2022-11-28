@@ -4,6 +4,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { useEffect, useRef } from "react";
 import useLocoScroll from "../hooks/useLocoScroll";
+import Link from "next/link";
 
 type Props = {};
 
@@ -78,13 +79,15 @@ const Home: NextPage = (props: Props) => {
         data-scroll-target="#main-container"
         className="font-semibold px-7 xl:px-0 max-w-7xl mx-auto sticky top-10 left-0 z-50 !mix-blend-difference"
       >
-        <div
-          ref={nav}
-          id="nav"
-          className="font-semibold w-fit text-xl lg:text-2xl fixed select-none text-white !mix-blend-difference"
-        >
-          Привет!
-        </div>
+        <Link href="/greenBox">
+          <div
+            ref={nav}
+            id="nav"
+            className="font-semibold w-fit text-xl lg:text-2xl fixed select-none text-white !mix-blend-difference"
+          >
+            Привет!
+          </div>
+        </Link>
       </div>
 
       <div className="bg-white w-full h-[100vh] flex justify-center items-center">
